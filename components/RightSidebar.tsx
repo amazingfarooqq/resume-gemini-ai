@@ -24,7 +24,7 @@ export default function RightSidebar({ design, updateDesign }: any) {
               </SelectContent>
             </Select>
           </div>
-          {/* <div>
+          {/* <div>d
             <Label>Size</Label>
             <div className="flex items-center space-x-2">
               <Button variant="outline" size="sm" onClick={() => updateDesign('fontSize', `${parseInt(design.fontSize) - 1}px`)}>-</Button>
