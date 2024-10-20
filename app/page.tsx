@@ -6,7 +6,37 @@ import LeftSidebar from '@/components/LeftSidebar'
 import MainContent from '@/components/MainContent'
 import RightSidebar from '@/components/RightSidebar'
 
-const initialResumeData = {
+interface ResumeData {
+  name: string
+  title: string
+  email: string
+  phone: string
+  website: string
+  summary: string
+  education: Array<{
+    degree: string
+    school: string
+    year: string
+  }>
+  experience: Array<{
+    title: string
+    company: string
+    period: string
+    description: string
+  }>
+  skills: string[]
+}
+
+interface Design {
+  fontFamily: string
+  fontWeight: 'normal' | 'bold'
+  fontStyle: 'normal' | 'italic'
+  textDecoration: 'none' | 'underline'
+  textAlign: 'left' | 'center' | 'right'
+  listStyleType: 'disc' | 'decimal' | 'none'
+}
+
+const initialResumeData: ResumeData = {
   name: "Farooq dad khan",
   title: "UX Designer",
   email: "farooq@example.com",
@@ -38,10 +68,10 @@ const initialResumeData = {
 }
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('create')
-  const [selectedTemplate, setSelectedTemplate] = useState(templates[1])
-  const [resumeData, setResumeData] = useState(initialResumeData)
-  const [design, setDesign] = useState({
+  const [activeTab, setActiveTab] = useState<'create' | 'templates'>('create')
+  const [selectedTemplate, setSelectedTemplate] = useState<any>(templates[1])
+  const [resumeData, setResumeData] = useState<ResumeData>(initialResumeData)
+  const [design, setDesign] = useState<Design>({
     fontFamily: 'Arial, sans-serif',
     fontWeight: 'normal',
     fontStyle: 'normal',
@@ -50,11 +80,11 @@ export default function App() {
     listStyleType: 'disc'
   })
 
-  const updateDesign = (property, value) => {
+  const updateDesign = (property: keyof Design, value: string) => {
     setDesign(prev => ({ ...prev, [property]: value }))
   }
 
-  const handleDataChange = (field, value) => {
+  const handleDataChange = (field: keyof ResumeData, value: any) => {
     setResumeData(prev => ({ ...prev, [field]: value }))
   }
 

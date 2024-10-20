@@ -6,35 +6,46 @@ import Link from 'next/link'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 
-export default function MainContent({ selectedTemplate, resumeData, design, handleDataChange }: any) {
-  const resumeRef = useRef(null)
+interface MainContentProps {
+  selectedTemplate: any
+  resumeData: any
+  design: any
+  handleDataChange: (field:any, value: any) => void
+}
+
+export default function MainContent({ selectedTemplate, resumeData, design, handleDataChange }: MainContentProps) {
+  const resumeRef = useRef<HTMLDivElement>(null)
 
   const downloadAsPDF = () => {
     const input = resumeRef.current
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png')
-      const pdf = new jsPDF('p', 'mm', 'a4')
-      const pdfWidth = pdf.internal.pageSize.getWidth()
-      const pdfHeight = pdf.internal.pageSize.getHeight()
-      const imgWidth = canvas.width
-      const imgHeight = canvas.height
-      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight)
-      const imgX = (pdfWidth - imgWidth * ratio) / 2
-      const imgY = 30
-      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio)
-      pdf.save('resume.pdf')
-    })
+    if (input) {
+      html2canvas(input).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png')
+        const pdf = new jsPDF('p', 'mm', 'a4')
+        const pdfWidth = pdf.internal.pageSize.getWidth()
+        const pdfHeight = pdf.internal.pageSize.getHeight()
+        const imgWidth = canvas.width
+        const imgHeight = canvas.height
+        const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight)
+        const imgX = (pdfWidth - imgWidth * ratio) / 2
+        const imgY = 30
+        pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio)
+        pdf.save('resume.pdf')
+      })
+    }
   }
 
   const downloadAsPNG = () => {
     const input = resumeRef.current
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png')
-      const link = document.createElement('a')
-      link.download = 'resume.png'
-      link.href = imgData
-      link.click()
-    })
+    if (input) {
+      html2canvas(input).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png')
+        const link = document.createElement('a')
+        link.download = 'resume.png'
+        link.href = imgData
+        link.click()
+      })
+    }
   }
 
   return (

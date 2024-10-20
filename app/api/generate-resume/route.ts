@@ -1,6 +1,5 @@
 // app/api/generate-resume/route.ts
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { GoogleAIFileManager } from '@google/generative-ai/server';
 import { NextResponse } from 'next/server'
 
 
@@ -23,7 +22,7 @@ export async function POST(req: Request) {
     
 If any fields are unclear or missing, fill them with appropriate placeholder values to ensure all fields are completed. add sample data to the fields if needed.`
 
-    const apiKey = process.env.NODE_ENV_GOOGLE_GENERATIVE_AI_API_KEY;
+    const apiKey: any = process.env.NODE_ENV_GOOGLE_GENERATIVE_AI_API_KEY;
     const genAI = new GoogleGenerativeAI(apiKey);
 
 
