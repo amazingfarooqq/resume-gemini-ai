@@ -10,7 +10,7 @@ interface MainContentProps {
   selectedTemplate: any
   resumeData: any
   design: any
-  handleDataChange: (field:any, value: any) => void
+  handleDataChange: (field: any, value: any) => void
 }
 
 export default function MainContent({ selectedTemplate, resumeData, design, handleDataChange }: MainContentProps) {
