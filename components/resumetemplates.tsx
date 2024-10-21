@@ -493,8 +493,3 @@ export const templates = [
       )
     }
   ]
-
-  export const additionalTemplates = [
-    
-    // ... (8 more template objects would be added here)
-  ];
